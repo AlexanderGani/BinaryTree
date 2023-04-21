@@ -132,7 +132,7 @@ public class BST {
     }
 
     private void Postorder(BSTNode node, ArrayList<BSTNode> arr) {
-        // if node is null, return
+        // if node equals null, return
         if (node == null) {
             return;
         }
