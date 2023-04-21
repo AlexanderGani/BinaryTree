@@ -35,7 +35,7 @@ public class BST {
      * @param nodes ArrayList of BSTNodes
      */
     public static void printNodes(ArrayList<BSTNode> nodes) {
-        for(int i=0; i<nodes.size()-1; i++) {
+        for (int i=0; i<nodes.size()-1; i++) {
             System.out.print(nodes.get(i) + "-");
         }
         System.out.println(nodes.get(nodes.size()-1));
@@ -48,7 +48,29 @@ public class BST {
      */
     public boolean search(int val) {
         // TODO: Complete the search function
-        return false;
+        //use recursion in order to search
+        //plug in root Node and value
+        return searcher(root, val);
+    }
+
+    //helper method
+    private boolean searcher(BSTNode node, int val) {
+        // if the node is null, stop recursion and return false
+        if (node == null) {
+            return false;
+        }
+        // if the node is val (aka val is in the tree) return true
+        if (node.getVal() == val) {
+            return true;
+        }
+        // if val is less than node, call method recursively, inputting the left node
+        if (val < node.getVal()) {
+            return searcher(node.getLeft(), val);
+        }
+        // else, call method recursively and input right
+        else {
+            return searcher(node.getRight(), val);
+        }
     }
 
     /**
@@ -56,7 +78,22 @@ public class BST {
      */
     public ArrayList<BSTNode> getInorder() {
         // TODO: Complete inorder traversal
-        return null;
+        // create array list to return
+        ArrayList<BSTNode> arr = new ArrayList<>();
+        //call helper method
+        Inorder(root, arr);
+        return arr;
+    }
+
+    private void Inorder(BSTNode node, ArrayList<BSTNode> arr) {
+        // same as previous, if node is null return
+        if (node == null) {
+            return;
+        }
+        // call recursively, because we are returning left to right start with left, then root, then right
+        Inorder(node.getLeft(), arr);
+        arr.add(node);
+        Inorder(node.getRight(), arr);
     }
 
     /**
@@ -64,7 +101,22 @@ public class BST {
      */
     public ArrayList<BSTNode> getPreorder() {
         // TODO: Complete preorder traversal
-        return null;
+        // create array list to return
+        ArrayList<BSTNode> arr = new ArrayList<>();
+        // call helper method
+        Preorder(root, arr);
+        return arr;
+    }
+
+    private void Preorder(BSTNode node, ArrayList<BSTNode> arr) {
+        // if node is null, return
+        if (node == null) {
+            return;
+        }
+        // since this is preorder, we start by adding root to arr, then left, then right, using recursion
+        arr.add(node);
+        Preorder(node.getLeft(), arr);
+        Preorder(node.getRight(), arr);
     }
 
     /**
@@ -72,7 +124,22 @@ public class BST {
      */
     public ArrayList<BSTNode> getPostorder() {
         // TODO: Complete postorder traversal
-        return null;
+        // create array list to return
+        ArrayList<BSTNode> arr = new ArrayList<>();
+        // call helper method
+        Postorder(root, arr);
+        return arr;
+    }
+
+    private void Postorder(BSTNode node, ArrayList<BSTNode> arr) {
+        // if node is null, return
+        if (node == null) {
+            return;
+        }
+        // since this is post order we recursively call left, then right, then add root
+        Postorder(node.getLeft(), arr);
+        Postorder(node.getRight(), arr);
+        arr.add(node);
     }
 
     /**
@@ -83,6 +150,25 @@ public class BST {
      */
     public void insert(int val) {
         // TODO: Complete insert
+        // using recursion we set root to the node helper method returns when given root and val as input
+        root = inserter(root, val);
+    }
+
+    private BSTNode inserter(BSTNode node, int val) {
+        // if node is null this means that the value should exist at this point, meaning we insert node(val) here
+        if (node == null) {
+            return new BSTNode(val);
+        }
+        // if val is less than node, use recursion on left node
+        if (val < node.getVal()) {
+            node.setLeft(inserter(node.getLeft(), val));
+        }
+        // if val is greater than node, use recursion on right node
+        else if (val > node.getVal()) {
+            node.setRight(inserter(node.getRight(), val));
+        }
+        // return node with no modifications because it already exists in tree
+        return node;
     }
 
     /**
