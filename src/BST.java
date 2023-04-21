@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 /**
  * An Integer Binary Search Tree
- * @author: Your Name Here
- * @version: Date
+ * @author: Alex Gani
+ * @version: 4/21/23
  */
 
 public class BST {
@@ -53,7 +53,13 @@ public class BST {
         return searcher(root, val);
     }
 
-    //helper method
+
+    /**
+     * A helper function of search that searches through tree to see if val is present
+     * @param node to compare int val to
+     * @param val integer to search for
+     * @return if node(val) is present in tree
+     */
     private boolean searcher(BSTNode node, int val) {
         // if the node is null, stop recursion and return false
         if (node == null) {
@@ -85,6 +91,11 @@ public class BST {
         return arr;
     }
 
+    /**
+     * A helper function of getInorder to return nodes in order
+     * @param node node that we will add to array if it is not null
+     * @param arr arr list which we add nodes to
+     */
     private void Inorder(BSTNode node, ArrayList<BSTNode> arr) {
         // same as previous, if node is null return
         if (node == null) {
@@ -108,6 +119,11 @@ public class BST {
         return arr;
     }
 
+    /**
+     * helper method of getPreorder which returns the tree in pre order
+     * @param node we add this to array list and return it in pre order if it is not nul
+     * @param arr array list we add the nodes to
+     */
     private void Preorder(BSTNode node, ArrayList<BSTNode> arr) {
         // if node is null, return
         if (node == null) {
@@ -131,6 +147,11 @@ public class BST {
         return arr;
     }
 
+    /**
+     * helper method of getPostorder which returns the nodes in post order (left-right-root)
+     * @param node node which we add to array list if not null
+     * @param arr array list containing nodes in post order which we return
+     */
     private void Postorder(BSTNode node, ArrayList<BSTNode> arr) {
         // if node equals null, return
         if (node == null) {
@@ -154,6 +175,12 @@ public class BST {
         root = inserter(root, val);
     }
 
+    /**
+     * helper method to insert which takes a value and inserts a node w/ that value into the tree if it doesnt exist already
+     * @param node node that we compare our values to in order to see where we are (e.g if val is larger or smaller node val
+     * @param val val of node that we want to insert into the tree
+     * @return either new node containing val (if it doesn't exist in tree already) or unchanged node (if it already exists)
+     */
     private BSTNode inserter(BSTNode node, int val) {
         // if node is null this means that the value should exist at this point, meaning we insert node(val) here
         if (node == null) {
